@@ -40,7 +40,7 @@ const PasswordReset = () => {
           setAuthStatus("")
 
     } catch (error) {
-      if (error.response.status === 400 && error.response) {
+      if (error.response) {
         const data = error.response.data;
         setIsLoading(false);
         setAuthStatus(data.error)
