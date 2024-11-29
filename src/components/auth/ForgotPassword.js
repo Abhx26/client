@@ -18,53 +18,53 @@ const ForgotPassword = () => {
 
 
 
-  const userValid = async () => {
+  // const userValid = async () => {
 
-    try {
-    // const response = await axios.post("http://localhost:9002/login", {
-    // eslint-disable-next-line no-unused-vars
-    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/forgotPassword/${id}/${token}`, {
-      // withCredentials: true, // To include credentials in the request
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  //   try {
+  //   // const response = await axios.post("http://localhost:9002/login", {
+  //   // eslint-disable-next-line no-unused-vars
+  //   const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/forgotPassword/${id}/${token}`, {
+  //     // withCredentials: true, // To include credentials in the request
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
 
-    // const data = response.data
-
-
+  //   // const data = response.data
 
 
 
 
-    //   // }
-    } catch (error) {
-      if (error.response.status === 401 && error.response) {
-        // const data = error.response.data;
-        // setAuthStatus(data.error)
-        // setAuthStatus("Reset Link Exipired")  
-        toast.error("Link Exipired Reset Again!", {
-          toastId: 'Unauthrized'
-      })
-        navigate("/passwordReset")
-        // //consolelog(data.error)
-        // window.alert(data.error);
-      }
-      //  else {
-      //   setAuthStatus("Something Went Worng")
-      //   //consolelog(error)
-
-      // }
-
-      }
-    // //consolelog(error);  
-  }
 
 
-  useEffect(() => {
-    userValid();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  //   //   // }
+  //   } catch (error) {
+  //     if (error.response.status === 401 && error.response) {
+  //       // const data = error.response.data;
+  //       // setAuthStatus(data.error)
+  //       // setAuthStatus("Reset Link Exipired")  
+  //       toast.error("Link Exipired Reset Again!", {
+  //         toastId: 'Unauthrized'
+  //     })
+  //       navigate("/passwordReset")
+  //       // //consolelog(data.error)
+  //       // window.alert(data.error);
+  //     }
+  //     //  else {
+  //     //   setAuthStatus("Something Went Worng")
+  //     //   //consolelog(error)
+
+  //     // }
+
+  //     }
+  //   // //consolelog(error);  
+  // }
+
+
+  // useEffect(() => {
+  //   userValid();
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
 
 
