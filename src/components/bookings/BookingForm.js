@@ -268,10 +268,38 @@ const BookingForm = () => {
         return;
       }
   
-      // Prepare the request data
+      // Format the eventDate, startTime, and endTime
       const formattedStartTime = `2000-01-01T${startTime.padStart(5, '0')}:00.000Z`;
       const formattedEndTime = `2000-01-01T${endTime.padStart(5, '0')}:00.000Z`;
+      const formattedEventDate = new Date(eventDate);
   
+      // Get current date and time
+      const now = new Date();
+  
+      // Check if eventDate and time is in the past
+      if (formattedEventDate < now) {
+        toast.error("Event date cannot be in the past!");
+        setIsLoading(false);
+        return;
+      }
+  
+      // Combine the eventDate and startTime to check against the current date/time
+      const eventStartDateTime = new Date(`${eventDate}T${startTime.padStart(5, '0')}`);
+      if (eventStartDateTime < now) {
+        toast.error("Invalid Date or Time! Please select a future date and time.");
+        setIsLoading(false);
+        return;
+      }
+  
+      // Combine the eventDate and endTime to check against the current date/time
+      const eventEndDateTime = new Date(`${eventDate}T${endTime.padStart(5, '0')}`);
+      if (eventEndDateTime < now) {
+        toast.error("Invalid Date or Time! Please select a future date and time.");
+        setIsLoading(false);
+        return;
+      }
+  
+      // Prepare the request data
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/showlt`,
         {
@@ -290,12 +318,10 @@ const BookingForm = () => {
       // Check the response
       const data = response.data;
       console.log("API Response:", data);
-      // console.log(data.message);
       if (data.message === "Halls fetched successfully") {
-        console.log("cdhbrfghgbvsfbzf");
-        toast.success("Lt fetched successfully!");
+        toast.success("LT fetched successfully!");
         setAvailableLTs(data.availableHalls);
-        console.log("Array length",availableLTs.length);
+        console.log("Array length", availableLTs.length);
   
         // Scroll to 1/2 of the window height
         const halfScreenHeight = window.innerHeight / 2;
@@ -320,6 +346,7 @@ const BookingForm = () => {
       setIsLoading(false);
     }
   };
+  
 
   // Helper function to handle errors
   const handleError = (error) => {
